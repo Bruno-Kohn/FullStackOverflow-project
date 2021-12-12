@@ -24,4 +24,4 @@ function Validation(body: Question): ValidationRes {
     };
 }
 
-export { Validation };
+export default Validation;

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Request, Response } from 'express';
 import { ValidationRes } from '../interfaces/validationInterface';
-import { Validation } from '../validations/validation';
+import Validation from '../validations/validation';
 import userValidation from '../validations/usersValidation';
 import * as questionsService from '../services/questionsService';
 import * as questionsRepository from '../repositories/questionsRepository';
