@@ -3,6 +3,7 @@ interface Question {
     student: string;
     class: string;
     tags: string;
+    submitAt?: string;
 }
 
 interface QuestionExtended extends Question {
@@ -11,7 +12,6 @@ interface QuestionExtended extends Question {
 
 interface Answer extends Question{
     answered: boolean;
-    submittedAt: string;
     answeredAt?: string;
     answeredBy?: number;
     answer?: string;

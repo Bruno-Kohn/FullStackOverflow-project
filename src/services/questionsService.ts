@@ -1,4 +1,5 @@
 import { v4 as uuid } from 'uuid';
+import dayjs from 'dayjs';
 import * as questionsRepository from '../repositories/questionsRepository';
 import * as usersRepository from '../repositories/usersRepository';
 import { Question, Answer } from '../interfaces/questionInterface';
@@ -15,6 +16,11 @@ async function getQuestionId(idQuestion: number): Promise<Answer> {
     if (result === null) {
         return null;
     }
+
+    if (result.answered) {
+        result.answeredAt = dayjs(result.answeredAt).format('YYYY-MM-DD hh:mm');
+    }
+    result.submitAt = dayjs(result.submitAt).format('YYYY-MM-DD hh:mm');
 
     return result;
 }
@@ -33,7 +39,8 @@ async function answerAQuestion(idQuestion: number, answer: string, userId: numbe
 async function getQuestions(): Promise<Question[]> {
     const questions = await questionsRepository.getQuestions();
 
-    return questions;
+    const questionsMapped = questions.map((question) => ({ ...question, submitAt: dayjs(question.submitAt).format('YYYY-MM-DD hh:mm') }));
+    return questionsMapped;
 }
 
 async function postUsers(user: User): Promise<string> {
