@@ -55,6 +55,11 @@ async function answerAQuestion(answer: string, answeredBy: number, questionId: n
         [answer, answeredBy, questionId],
     );
 
+    await connection.query(
+        'UPDATE questions SET answer_id = $1 WHERE id = $2 RETURNING *;',
+        [result.rows[0].id, questionId],
+    );
+
     return result.rows[0];
 }
 
